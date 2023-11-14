@@ -1,7 +1,7 @@
+import { AdminLayout } from 'layouts/AdminLayout';
 import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
 import 'tailwindcss/tailwind.css';
-
 
 const router = createBrowserRouter([
   {
@@ -25,9 +25,9 @@ const router = createBrowserRouter([
   {
     path: 'admin',
     element: (
-      <p>
+      <AdminLayout>
         <Outlet />
-      </p>
+      </AdminLayout>
     ),
     children: [
       {
