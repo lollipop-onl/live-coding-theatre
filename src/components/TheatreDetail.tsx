@@ -4,12 +4,11 @@ import { db } from 'modules/firebase';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useMatch } from 'react-router-dom';
-import { Input, number, object, string, optional } from 'valibot';
+import { Input, object, string, optional } from 'valibot';
 
 const TheatreMetaSchema = object({
   name: string(),
   message: optional(string()),
-  timerTo: optional(string()),
 });
 
 export const TheatreDetail: React.FC = () => {
@@ -62,16 +61,6 @@ export const TheatreDetail: React.FC = () => {
             />
             {formState.errors.message && (
               <p>{formState.errors.message.message}</p>
-            )}
-          </div>
-          <div className="grid gap-2">
-            <input
-              className="w-full border rounded px-4 py-2"
-              placeholder="Timer To"
-              {...register('timerTo')}
-            />
-            {formState.errors.timerTo && (
-              <p>{formState.errors.timerTo.message}</p>
             )}
           </div>
           <input
