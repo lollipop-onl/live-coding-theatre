@@ -1,4 +1,4 @@
-import { onValue, ref, push, remove } from 'firebase/database';
+import { onValue, ref, set, remove } from 'firebase/database';
 import { db } from 'modules/firebase';
 import { useCallback, useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
@@ -16,7 +16,7 @@ export const TheatreList: React.FC = () => {
 
     if (!name) return;
 
-    await push(ref(db, 'v2/theatres'), {
+    await set(ref(db, `v2/theatres/${crypto.randomUUID()}`), {
       meta: {
         name,
       },
