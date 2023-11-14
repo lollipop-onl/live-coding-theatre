@@ -1,6 +1,7 @@
 import { valibotResolver } from '@hookform/resolvers/valibot';
 import { useAuth } from 'hooks/useAuth';
 import { useForm } from 'react-hook-form';
+import { NavLink } from 'react-router-dom';
 import { type Input, object, string, email } from 'valibot';
 
 type Props = {
@@ -13,7 +14,7 @@ const LoginSchema = object({
 });
 
 export const AdminLayout: React.FC<Props> = ({ children }) => {
-  const { user, isInitialized, signIn } = useAuth();
+  const { user, isInitialized, signIn, signOut } = useAuth();
   const { register, handleSubmit } = useForm<Input<typeof LoginSchema>>({
     resolver: valibotResolver(LoginSchema),
     defaultValues: {
@@ -75,5 +76,17 @@ export const AdminLayout: React.FC<Props> = ({ children }) => {
     );
   }
 
-  return <div>{children}</div>;
+  return (
+    <div className="max-w-lg mx-auto py-8">
+      <header className="flex items-center gap-x-4">
+        <button className="border rounded px-4 py-2" onClick={() => signOut()}>
+          Sign Out
+        </button>
+        <NavLink className="underline hover:underline" to="/admin">
+          List
+        </NavLink>
+      </header>
+      <main className="mt-8">{children}</main>
+    </div>
+  );
 };

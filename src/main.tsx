@@ -1,3 +1,5 @@
+import { TheatreDetail } from 'components/TheatreDetail';
+import { TheatreList } from 'components/TheatreList';
 import { AdminLayout } from 'layouts/AdminLayout';
 import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
@@ -32,11 +34,11 @@ const router = createBrowserRouter([
     children: [
       {
         path: '',
-        element: <p>movie list</p>,
+        element: <TheatreList />,
       },
       {
         path: ':uuid',
-        element: <p>detail</p>,
+        element: <TheatreDetail />,
       },
     ],
   },
