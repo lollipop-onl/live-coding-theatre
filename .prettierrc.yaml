@@ -1,0 +1,5 @@
+singleQuote: true
+plugins:
+  - prettier-plugin-packagejson
+  - prettier-plugin-tailwindcss
+  - '@trivago/prettier-plugin-sort-imports'

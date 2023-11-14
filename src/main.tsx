@@ -1,1 +1,1 @@
-console.log("application ready");
+console.log('application ready');
