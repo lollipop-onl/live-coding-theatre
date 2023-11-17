@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@fontsource/ibm-plex-sans-jp':
+    specifier: ^5.0.7
+    version: 5.0.7
   '@hookform/resolvers':
     specifier: ^3.3.2
     version: 3.3.2(react-hook-form@7.48.2)
@@ -23,6 +26,9 @@ dependencies:
   react-router-dom:
     specifier: ^6.18.0
     version: 6.18.0(react-dom@18.2.0)(react@18.2.0)
+  react-spinners:
+    specifier: ^0.13.8
+    version: 0.13.8(react-dom@18.2.0)(react@18.2.0)
   valibot:
     specifier: ^0.20.1
     version: 0.20.1
@@ -984,6 +990,10 @@ packages:
 
   /@firebase/webchannel-wrapper@0.10.3:
     resolution: {integrity: sha512-+ZplYUN3HOpgCfgInqgdDAbkGGVzES1cs32JJpeqoh87SkRobGXElJx+1GZSaDqzFL+bYiX18qEcBK76mYs8uA==}
+    dev: false
+
+  /@fontsource/ibm-plex-sans-jp@5.0.7:
+    resolution: {integrity: sha512-sTs+usOaRgfjIXhEPCLsJL+i8BO77WkM7qG4YfKVvVJ9FxtObAH5KjWuapxx8ENr2mZMPKFzW+6q/K/a/20i9A==}
     dev: false
 
   /@grpc/grpc-js@1.9.9:
@@ -2287,6 +2297,16 @@ packages:
     dependencies:
       '@remix-run/router': 1.11.0
       react: 18.2.0
+    dev: false
+
+  /react-spinners@0.13.8(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-3e+k56lUkPj0vb5NDXPVFAOkPC//XyhKPJjvcGjyMNPWsBKpplfeyialP74G7H7+It7KzhtET+MvGqbKgAqpZA==}
+    peerDependencies:
+      react: ^16.0.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.0.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
     dev: false
 
   /react@18.2.0:
