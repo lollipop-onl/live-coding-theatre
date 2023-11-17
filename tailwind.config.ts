@@ -1,4 +1,5 @@
 import { family as IBMPlexSansJP } from '@fontsource/ibm-plex-sans-jp/metadata.json';
+import { addDynamicIconSelectors } from '@iconify/tailwind';
 import type { Config } from 'tailwindcss';
 
 const config: Config = {
@@ -10,7 +11,7 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [addDynamicIconSelectors()],
 };
 
 export default config;

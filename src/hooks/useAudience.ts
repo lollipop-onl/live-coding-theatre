@@ -1,11 +1,8 @@
-import {
-  type User,
-  onAuthStateChanged,
-  signInAnonymously,
-} from 'firebase/auth';
+import { type User, onAuthStateChanged, signInAnonymously } from 'firebase/auth';
 import { onValue, ref, set } from 'firebase/database';
 import { auth, db } from 'modules/firebase';
 import { useEffect, useState } from 'react';
+
 
 type Audience = {
   displayName: string;
@@ -26,6 +23,20 @@ export const useAudience = (uuid: string) => {
       code: null,
       answer: null,
     });
+  };
+
+  const updateCode = async (code: string) => {
+    if (!audience || !user) return;
+
+    await set(ref(db, `v2/theatres/${uuid}/audiences/${user.uid}/code`), code);
+  };
+
+  const updateName = async (name: string) => {
+    if (!audience || !user) return;
+
+    console.log('update name', name);
+
+    await set(ref(db, `v2/theatres/${uuid}/audiences/${user.uid}/displayName`), name);
   };
 
   useEffect(() => {
@@ -50,5 +61,5 @@ export const useAudience = (uuid: string) => {
     );
   }, [user]);
 
-  return { audience, isInitialized, enterTheatre };
+  return { audience, isInitialized, enterTheatre, updateCode, updateName };
 };
