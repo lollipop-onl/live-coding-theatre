@@ -60,6 +60,7 @@ export const TheatreSeat: React.FC = () => {
               <Editor
                 name={audience.displayName}
                 code={audience.code || ''}
+                value={theatre.value || ''}
                 onChangeName={updateName}
                 onChangeCode={updateCode}
               />

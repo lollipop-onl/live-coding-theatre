@@ -1,11 +1,13 @@
 import { Runner } from './Runner';
 import MonacoEditor from '@monaco-editor/react';
-import { editor } from 'monaco-editor';
-import { useEffect, useRef, useState } from 'react';
+import Monaco, { editor } from 'monaco-editor';
+import { useEffect, useMemo, useRef, useState } from 'react';
+
 
 type Props = {
   name: string;
   code: string;
+  value: string;
   onChangeName(name: string): void;
   onChangeCode(code: string): void;
 };
@@ -13,11 +15,23 @@ type Props = {
 export const Editor: React.FC<Props> = ({
   name,
   code,
+  value,
   onChangeName,
   onChangeCode,
 }) => {
   const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null);
+  const monacoRef = useRef<typeof Monaco | null>(null);
   const [renderKey, setRenderKey] = useState(Date.now());
+
+  const providedValue = useMemo(() => {
+    try {
+      JSON.parse(value);
+
+      return value;
+    } catch {
+      return 'null';
+    }
+  }, [value]);
 
   const changeName = () => {
     const name = window.prompt('Enter your name');
@@ -55,6 +69,28 @@ export const Editor: React.FC<Props> = ({
     };
   }, []);
 
+  useEffect(() => {
+    if (!monacoRef.current) return;
+
+    const disposable =
+      monacoRef.current.languages.typescript.javascriptDefaults.addExtraLib(
+        `
+        /** 
+         * Post your answer to the question 
+         * @param {unknown} answer Value of the answer
+         */
+        declare function postAnswer(answer: unknown): void;
+
+        /**
+         * Provided value of the question
+         */
+        declare const _value: ${providedValue}
+      `,
+      );
+
+    return () => disposable.dispose();
+  }, [monacoRef.current, value]);
+
   return (
     <>
       <div key={renderKey} className="flex flex-col h-full bg-[#1e1e1e]">
@@ -68,13 +104,14 @@ export const Editor: React.FC<Props> = ({
               enabled: false,
             },
           }}
-          onMount={(editor) => {
+          onMount={(editor, monaco) => {
+            monacoRef.current = monaco;
             editorRef.current = editor;
           }}
           onChange={(value) => onChangeCode(value || '')}
         />
         <div className="flex-shrink-0 border-t border-zinc-900">
-          <Runner code={code} />
+          <Runner code={code} value={value} />
         </div>
         <div className="flex-shrink-0 bg-zinc-800 border-t border-zinc-900 px-4 flex">
           <button

@@ -2,12 +2,14 @@ import { Runner } from './Runner';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { atomOneDark } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 
+
 type Props = {
   displayName: string;
   code: string;
+  value: string;
 };
 
-export const Seat: React.FC<Props> = ({ displayName, code }) => {
+export const Seat: React.FC<Props> = ({ displayName, code, value }) => {
   return (
     <div className="bg-[#282c34] border-2 border-zinc-900 rounded-tl-2xl">
       <div className="pt-2 px-3">
@@ -18,7 +20,9 @@ export const Seat: React.FC<Props> = ({ displayName, code }) => {
               by {displayName}
             </span>
           </p>
-          <p className="flex-shrink-0 text-xs text-zinc-400">{code?.length || 0} chars</p>
+          <p className="flex-shrink-0 text-xs text-zinc-400">
+            {code?.length || 0} chars
+          </p>
         </div>
       </div>
       <div className="min-h-[80px] max-h-[200px] overflow-y-auto px-2">
@@ -27,7 +31,7 @@ export const Seat: React.FC<Props> = ({ displayName, code }) => {
         </SyntaxHighlighter>
       </div>
       <div className="border-t-2 border-zinc-900">
-        <Runner code={code} />
+        <Runner code={code} value={value} />
       </div>
     </div>
   );

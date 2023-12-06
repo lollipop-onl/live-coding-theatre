@@ -6,9 +6,11 @@ import { useForm } from 'react-hook-form';
 import { useMatch } from 'react-router-dom';
 import { Input, object, string, optional } from 'valibot';
 
+
 const TheatreMetaSchema = object({
   name: string(),
   message: optional(string()),
+  value: optional(string()),
 });
 
 export const TheatreDetail: React.FC = () => {
@@ -44,7 +46,13 @@ export const TheatreDetail: React.FC = () => {
   return (
     <div>
       <div className="mb-4">
-        <a className='underline hover:no-underline' href={`/${match.params.uuid}`} target="_blank">Open lobby in new tab</a>
+        <a
+          className="underline hover:no-underline"
+          href={`/${match.params.uuid}`}
+          target="_blank"
+        >
+          Open lobby in new tab
+        </a>
       </div>
       <form onSubmit={onSubmit}>
         <div className="grid gap-4">
@@ -65,6 +73,14 @@ export const TheatreDetail: React.FC = () => {
             {formState.errors.message && (
               <p>{formState.errors.message.message}</p>
             )}
+          </div>
+          <div className="grid gap-2">
+            <textarea
+              className="w-full border rounded px-4 py-2"
+              placeholder="Provided value"
+              {...register('value')}
+            />
+            {formState.errors.value && <p>{formState.errors.value.message}</p>}
           </div>
           <input
             className="bg-purple-500 text-white px-4 py-2 rounded"

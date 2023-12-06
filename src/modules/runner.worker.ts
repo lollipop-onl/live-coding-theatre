@@ -10,21 +10,24 @@ const optimize = (result: unknown): string | undefined => {
 };
 
 self.addEventListener('message', ({ data }) => {
-  if (typeof data !== 'string') return;
+  if (!data || typeof data !== 'object') return;
+  if (typeof data.code !== 'string') return;
 
   let result: unknown;
 
   try {
-    // @ts-expect-error
-    console.answer = (data: unknown) => {
+    const _value = data.value;
+    const postAnswer = (data: unknown) => {
       result = data;
 
       console.dir(data);
     };
-    eval(data);
+    eval(data.code);
 
     self.postMessage({ success: true, body: optimize(result) });
   } catch (err) {
+    console.error(err);
+    
     self.postMessage({ success: false, body: String(err) });
   }
 });

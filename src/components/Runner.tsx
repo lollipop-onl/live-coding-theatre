@@ -1,11 +1,12 @@
 import { clsx } from 'clsx';
 import RunnerWorker from 'modules/runner.worker?worker';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { darcula } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 
 type Props = {
   code: string;
+  value: string;
 };
 
 type RunnerAnswer = {
@@ -13,9 +14,17 @@ type RunnerAnswer = {
   body: string;
 };
 
-export const Runner: React.FC<Props> = ({ code }) => {
+export const Runner: React.FC<Props> = ({ code, value }) => {
   const [answer, setAnswer] = useState<RunnerAnswer>();
   const [isRunning, setIsRunning] = useState(false);
+
+  const parsedValue = useMemo(() => {
+    try {
+      return JSON.parse(value);
+    } catch {
+      return null;
+    }
+  }, [value]);
 
   useEffect(() => {
     setIsRunning(true);
@@ -42,7 +51,7 @@ export const Runner: React.FC<Props> = ({ code }) => {
       setIsRunning(false);
     });
 
-    worker.postMessage(code);
+    worker.postMessage({ code, value: parsedValue });
 
     setTimeout(() => {
       if (!isSucceed) {

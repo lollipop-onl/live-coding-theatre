@@ -10,6 +10,7 @@ import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 import { useParams } from 'react-router-dom';
 import { useFullscreen } from 'react-use';
 
+
 type TheatreAudience = {
   uuid: string;
   displayName: string;
@@ -83,6 +84,7 @@ export const TheatreScreen: React.FC = () => {
                   <Seat
                     displayName={audience.displayName}
                     code={audience.code}
+                    value={theatre.value || ''}
                   />
                 </div>
               ))}
