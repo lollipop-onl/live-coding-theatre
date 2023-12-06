@@ -1,16 +1,11 @@
 const optimize = (result: unknown): string | undefined => {
   if (result === null) return JSON.stringify(null);
+  if (typeof result === 'undefined') return 'undefined';
 
-  switch (typeof result) {
-    case 'string':
-    case 'number':
-    case 'bigint':
-    case 'boolean':
-      return JSON.stringify(result);
-    case 'undefined':
-      return 'undefined';
-    default:
-      return JSON.stringify(String(result));
+  try {
+    return JSON.stringify(result);
+  } catch {
+    return JSON.stringify(String(result));
   }
 };
 
