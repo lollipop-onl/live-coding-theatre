@@ -18,7 +18,7 @@ export const Seat: React.FC<Props> = ({ displayName, code }) => {
               by {displayName}
             </span>
           </p>
-          <p className="flex-shrink-0 text-xs text-zinc-400">123 chars</p>
+          <p className="flex-shrink-0 text-xs text-zinc-400">{code.length} chars</p>
         </div>
       </div>
       <div className="min-h-[80px] max-h-[200px] overflow-y-auto px-2">
