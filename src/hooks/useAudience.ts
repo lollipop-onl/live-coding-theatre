@@ -3,6 +3,7 @@ import { onDisconnect, onValue, ref, set } from 'firebase/database';
 import { auth, db } from 'modules/firebase';
 import { useEffect, useState } from 'react';
 
+
 type Audience = {
   displayName: string;
   code: string;
@@ -40,9 +41,9 @@ export const useAudience = (uuid: string) => {
   };
 
   useEffect(() => {
-    return onValue(ref(db, '.info/connected'), async (snapshot) => {
-      if (!user) return;
+    if (!user || !uuid || !audience) return;
 
+    return onValue(ref(db, '.info/connected'), async () => {
       const connectedRef = ref(
         db,
         `v2/theatres/${uuid}/audiences/${user.uid}/connected`,
@@ -52,7 +53,7 @@ export const useAudience = (uuid: string) => {
 
       await set(connectedRef, true);
     });
-  }, [uuid, user]);
+  }, [uuid, user, audience]);
 
   useEffect(() => {
     return onAuthStateChanged(auth, (user) => {
