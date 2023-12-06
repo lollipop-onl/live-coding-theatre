@@ -25,7 +25,7 @@ export const useAudience = (uuid: string) => {
     });
   };
 
-  const updateCode = async (code: string) => {
+  const updateCode = async (code: string, answer: string) => {
     if (!audience || !user) return;
 
     await set(ref(db, `v2/theatres/${uuid}/audiences/${user.uid}/code`), code);

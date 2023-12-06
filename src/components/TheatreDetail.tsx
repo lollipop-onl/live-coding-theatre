@@ -43,6 +43,9 @@ export const TheatreDetail: React.FC = () => {
 
   return (
     <div>
+      <div className="mb-4">
+        <a className='underline hover:no-underline' href={`/${match.params.uuid}`} target="_blank">Open lobby in new tab</a>
+      </div>
       <form onSubmit={onSubmit}>
         <div className="grid gap-4">
           <div className="grid gap-2">
