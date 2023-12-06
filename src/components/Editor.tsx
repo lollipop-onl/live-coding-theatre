@@ -1,5 +1,4 @@
 import { Runner } from './Runner';
-import { Disclosure } from '@headlessui/react';
 import MonacoEditor from '@monaco-editor/react';
 import { editor } from 'monaco-editor';
 import { useEffect, useRef, useState } from 'react';
@@ -74,6 +73,9 @@ export const Editor: React.FC<Props> = ({
           }}
           onChange={(value) => onChangeCode(value || '')}
         />
+        <div className="flex-shrink-0 border-t border-zinc-900">
+          <Runner code={code} />
+        </div>
         <div className="flex-shrink-0 bg-zinc-800 border-t border-zinc-900 px-4 flex">
           <button
             className="hover:bg-zinc-600 text-zinc-400 py-1 px-2 text-sm flex items-center gap-x-1"
@@ -91,23 +93,9 @@ export const Editor: React.FC<Props> = ({
             <span className="icon-[carbon--clean]" />
             Format
           </button>
-          <Disclosure>
-            <Disclosure.Button
-              className="ml-auto hover:bg-zinc-600 text-zinc-400 py-1 px-2 text-sm flex items-center gap-x-1"
-              title="Show Execution Result"
-            >
-              <span className="icon-[carbon--chat-bot]" />
-              Execute
-            </Disclosure.Button>
-            <Disclosure.Panel className="absolute bottom-9 right-5 left-5 drop-shadow">
-              <div className="bg-[#444] w-full h-32 rounded">
-                <Runner code={code} />
-              </div>
-              <div className="flex justify-end px-4">
-                <div className="w-0 h-0 border-[12px] border-b-0 border-transparent border-t-[#444]" />
-              </div>
-            </Disclosure.Panel>
-          </Disclosure>
+          <p className="ml-auto text-zinc-400 py-1 px-2 text-sm grid place-items-center">
+            {code.length} chars
+          </p>
         </div>
       </div>
     </>

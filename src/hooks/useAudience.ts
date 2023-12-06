@@ -1,12 +1,12 @@
 import { type User, onAuthStateChanged, signInAnonymously } from 'firebase/auth';
-import { onValue, ref, set } from 'firebase/database';
+import { onDisconnect, onValue, ref, set } from 'firebase/database';
 import { auth, db } from 'modules/firebase';
 import { useEffect, useState } from 'react';
 
-
 type Audience = {
   displayName: string;
-  code: string | null;
+  code: string;
+  connected: boolean;
 };
 
 export const useAudience = (uuid: string) => {
@@ -19,7 +19,8 @@ export const useAudience = (uuid: string) => {
 
     await set(ref(db, `v2/theatres/${uuid}/audiences/${user.uid}`), {
       displayName,
-      code: null,
+      code: '',
+      connected: true,
     });
   };
 
@@ -37,6 +38,21 @@ export const useAudience = (uuid: string) => {
       name,
     );
   };
+
+  useEffect(() => {
+    return onValue(ref(db, '.info/connected'), async (snapshot) => {
+      if (!user) return;
+
+      const connectedRef = ref(
+        db,
+        `v2/theatres/${uuid}/audiences/${user.uid}/connected`,
+      );
+
+      await onDisconnect(connectedRef).set(false);
+
+      await set(connectedRef, true);
+    });
+  }, [uuid, user]);
 
   useEffect(() => {
     return onAuthStateChanged(auth, (user) => {
