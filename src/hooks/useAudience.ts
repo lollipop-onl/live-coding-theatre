@@ -7,7 +7,6 @@ import { useEffect, useState } from 'react';
 type Audience = {
   displayName: string;
   code: string | null;
-  answer: string | null;
 };
 
 export const useAudience = (uuid: string) => {
@@ -21,11 +20,10 @@ export const useAudience = (uuid: string) => {
     await set(ref(db, `v2/theatres/${uuid}/audiences/${user.uid}`), {
       displayName,
       code: null,
-      answer: null,
     });
   };
 
-  const updateCode = async (code: string, answer: string) => {
+  const updateCode = async (code: string) => {
     if (!audience || !user) return;
 
     await set(ref(db, `v2/theatres/${uuid}/audiences/${user.uid}/code`), code);
@@ -34,9 +32,10 @@ export const useAudience = (uuid: string) => {
   const updateName = async (name: string) => {
     if (!audience || !user) return;
 
-    console.log('update name', name);
-
-    await set(ref(db, `v2/theatres/${uuid}/audiences/${user.uid}/displayName`), name);
+    await set(
+      ref(db, `v2/theatres/${uuid}/audiences/${user.uid}/displayName`),
+      name,
+    );
   };
 
   useEffect(() => {

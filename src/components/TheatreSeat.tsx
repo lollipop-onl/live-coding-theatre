@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { useParams } from 'react-router-dom';
 
+
 export const TheatreSeat: React.FC = () => {
   const { uuid } = useParams();
   const [isWaiting, setIsWaiting] = useState(true);
@@ -52,7 +53,7 @@ export const TheatreSeat: React.FC = () => {
       {audience ? (
         <div className="w-screen h-screen overflow-hidden">
           <div className="flex flex-col h-full">
-            <div className="flex-shrink-0">
+            <div className="flex-shrink-0 border-b border-zinc-900">
               <Screen text={theatre.message} />
             </div>
             <div className="grow">
@@ -66,7 +67,7 @@ export const TheatreSeat: React.FC = () => {
           </div>
         </div>
       ) : (
-        <div className="w-screen min-h-screen grid place-items-center p-5 w-full h-full">
+        <div className="w-screen min-h-screen grid place-items-center p-5 h-full">
           <Lobby theatre={theatre} onSubmit={onSubmit} />
         </div>
       )}
