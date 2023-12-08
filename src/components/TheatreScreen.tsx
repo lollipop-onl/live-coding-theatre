@@ -6,10 +6,8 @@ import { onValue, ref } from 'firebase/database';
 import { useTheatre } from 'hooks/useTheatre';
 import { db } from 'modules/firebase';
 import { useEffect, useRef, useState } from 'react';
-import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 import { useParams } from 'react-router-dom';
 import { useFullscreen } from 'react-use';
-
 
 type TheatreAudience = {
   uuid: string;
@@ -68,28 +66,17 @@ export const TheatreScreen: React.FC = () => {
           <Screen text={theatre.message} />
         </div>
         <div className="grow overflow-y-auto">
-          <ResponsiveMasonry
-            columnsCountBreakPoints={{
-              350: 1,
-              750: 2,
-              900: 3,
-              1250: 4,
-              1500: 5,
-              1750: 6,
-            }}
-          >
-            <Masonry>
-              {audiences.map((audience) => (
-                <div key={audience.uuid} className="px-4 py-2">
-                  <Seat
-                    displayName={audience.displayName}
-                    code={audience.code}
-                    value={theatre.value || ''}
-                  />
-                </div>
-              ))}
-            </Masonry>
-          </ResponsiveMasonry>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3">
+            {audiences.map((audience) => (
+              <div key={audience.uuid} className="px-4 py-2">
+                <Seat
+                  displayName={audience.displayName}
+                  code={audience.code}
+                  value={theatre.value || ''}
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
       {!isFullscreen && (

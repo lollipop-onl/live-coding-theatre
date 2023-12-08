@@ -25,7 +25,7 @@ export const Seat: React.FC<Props> = ({ displayName, code, value }) => {
           </p>
         </div>
       </div>
-      <div className="min-h-[80px] max-h-[200px] overflow-y-auto px-2">
+      <div className="h-48 overflow-y-auto px-2">
         <SyntaxHighlighter language="javascript" style={atomOneDark}>
           {code}
         </SyntaxHighlighter>
