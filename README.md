@@ -1,6 +1,6 @@
 <img src="artwork.webp">
 
-# <img src="logo.svg" height="40" alt="Live Coding Theatre">
+# <img src="live-coding-theatre.svg" height="40" alt="Live Coding Theatre">
 
 Share your code, enjoy live.
 
