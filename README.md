@@ -1,10 +1,8 @@
-<h1 align="center">
-  <img src="logo.svg" height="120" alt="Live Coding Theatre">
-</h1>
+# <img src="logo.svg" height="80" alt="Live Coding Theatre">
 
 Share your code, enjoy live.
 
-## for Developers'
+## for Developers
 
 ### Requirements
 
