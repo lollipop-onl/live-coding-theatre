@@ -2,9 +2,11 @@ name: CodeQL
 
 on:
   push:
-    branches: [main]
+    branches: 
+      - main
   pull_request:
-    branches: [main]
+    branches: 
+      - main
   
 jobs:
   analyze:
@@ -17,7 +19,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        language: [javascript]
+        language:
+          - javascript
     steps:
       - uses: actions/checkout@v4
 
