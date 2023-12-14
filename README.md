@@ -1,4 +1,4 @@
-# <img src="logo.svg" height="80" alt="Live Coding Theatre">
+# <img src="logo.svg" height="112" alt="Live Coding Theatre">
 
 Share your code, enjoy live.
 
